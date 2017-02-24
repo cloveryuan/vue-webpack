@@ -20,11 +20,24 @@
 * config: webpack等配置文件
 * config/VENDORS：公共js/css文件路径
 
----
-项目启动:
+PS: VENDORS中如果增加公共js/css文件，需要重启服务器才能生效
 
-* 开发：npm run dev
-* 编译：npm run build
+---
+环境切换:
+
+* 相关配置：config/CONFIG.JS中更改
+* local: 本地数据请求，需要在data文件夹中创建本地数据，另外services中配置localUrl才能生效
+* proxy：代理数据请求，可以在本地服务访问预发接口，不会跨域
+
+PS: proxy中如果增加配置项，需要重启服务器才能生效
+
+---
+项目命令:
+
+* 启动开发：npm run dev
+* 编译-预发：npm run build   (config/webpack.beta.config.multi.js中配置预发接口域名)
+* 编译-线上：npm run online  (config/webpack.online.config.multi.js中配置线上接口域名)
+* 编译-精灵图：npm run sprite
 
 ---
 分支说明:

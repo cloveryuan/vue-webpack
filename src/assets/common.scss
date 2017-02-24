@@ -1,0 +1,16 @@
+@import "_icons";
+
+.common{
+    color: red;
+}
+body{
+    background-color: pink;
+    transform: translateX(30px);
+}
+.indexhome span{
+    // @include sprite($rush_rob);
+}
+.icons{
+    @include sprite($wq_icon);
+    margin: 10px;
+}

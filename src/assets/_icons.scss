@@ -1,0 +1,134 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$rush-rob-name: 'rush_rob';
+$rush-rob-x: 167px;
+$rush-rob-y: 0px;
+$rush-rob-offset-x: -167px;
+$rush-rob-offset-y: 0px;
+$rush-rob-width: 68px;
+$rush-rob-height: 66px;
+$rush-rob-total-width: 235px;
+$rush-rob-total-height: 176px;
+$rush-rob-image: '~img/icons.png';
+$rush-rob: (167px, 0px, -167px, 0px, 68px, 66px, 235px, 176px, '~img/icons.png', 'rush_rob', );
+$search-bar-icon-1-name: 'search_bar_icon_1';
+$search-bar-icon-1-x: 167px;
+$search-bar-icon-1-y: 66px;
+$search-bar-icon-1-offset-x: -167px;
+$search-bar-icon-1-offset-y: -66px;
+$search-bar-icon-1-width: 63px;
+$search-bar-icon-1-height: 63px;
+$search-bar-icon-1-total-width: 235px;
+$search-bar-icon-1-total-height: 176px;
+$search-bar-icon-1-image: '~img/icons.png';
+$search-bar-icon-1: (167px, 66px, -167px, -66px, 63px, 63px, 235px, 176px, '~img/icons.png', 'search_bar_icon_1', );
+$search-bar-icon-2-name: 'search_bar_icon_2';
+$search-bar-icon-2-x: 0px;
+$search-bar-icon-2-y: 146px;
+$search-bar-icon-2-offset-x: 0px;
+$search-bar-icon-2-offset-y: -146px;
+$search-bar-icon-2-width: 30px;
+$search-bar-icon-2-height: 30px;
+$search-bar-icon-2-total-width: 235px;
+$search-bar-icon-2-total-height: 176px;
+$search-bar-icon-2-image: '~img/icons.png';
+$search-bar-icon-2: (0px, 146px, 0px, -146px, 30px, 30px, 235px, 176px, '~img/icons.png', 'search_bar_icon_2', );
+$store-coupon-name: 'store_coupon';
+$store-coupon-x: 30px;
+$store-coupon-y: 146px;
+$store-coupon-offset-x: -30px;
+$store-coupon-offset-y: -146px;
+$store-coupon-width: 30px;
+$store-coupon-height: 24px;
+$store-coupon-total-width: 235px;
+$store-coupon-total-height: 176px;
+$store-coupon-image: '~img/icons.png';
+$store-coupon: (30px, 146px, -30px, -146px, 30px, 24px, 235px, 176px, '~img/icons.png', 'store_coupon', );
+$wq-icon-name: 'wq_icon';
+$wq-icon-x: 0px;
+$wq-icon-y: 0px;
+$wq-icon-offset-x: 0px;
+$wq-icon-offset-y: 0px;
+$wq-icon-width: 167px;
+$wq-icon-height: 146px;
+$wq-icon-total-width: 235px;
+$wq-icon-total-height: 176px;
+$wq-icon-image: '~img/icons.png';
+$wq-icon: (0px, 0px, 0px, 0px, 167px, 146px, 235px, 176px, '~img/icons.png', 'wq_icon', );
+$spritesheet-width: 235px;
+$spritesheet-height: 176px;
+$spritesheet-image: '~img/icons.png';
+$spritesheet-sprites: ($rush-rob, $search-bar-icon-1, $search-bar-icon-2, $store-coupon, $wq-icon, );
+$spritesheet: (235px, 176px, '~img/icons.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}
